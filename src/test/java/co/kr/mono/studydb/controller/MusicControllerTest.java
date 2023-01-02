@@ -24,4 +24,12 @@ class MusicControllerTest {
         this.mockMvc.perform(get("/albumList/BTS"))
                 .andDo(print());
     }
+
+    @Test
+    public void artistTest() throws Exception {
+        this.mockMvc.perform(get("/artist/BTS"))
+                .andDo(print());
+    }
+
+
 }

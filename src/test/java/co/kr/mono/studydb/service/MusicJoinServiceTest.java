@@ -1,6 +1,7 @@
 package co.kr.mono.studydb.service;
 
 import co.kr.mono.studydb.model.music.Album;
+import co.kr.mono.studydb.model.music.Artist;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -29,10 +30,17 @@ class MusicJoinServiceTest {
     void setup() {mapper = new ObjectMapper();}
 
     @Test
-    @DisplayName("Album에 담긴 노래목록 조회")
+    @DisplayName("Album 에 담긴 노래목록 조회")
     public void albumList() throws JsonProcessingException {
         List<Album> albumList = musicJoinService.searchArtistList("BTS");
         log.info("Json 변환 : ", mapper.writeValueAsString(albumList));
+    }
+
+    @Test
+    @DisplayName("Album 정보 조회")
+    public void searchArtist() throws JsonProcessingException {
+        Artist artist = musicJoinService.searchArtist("BTS");
+        log.info("Json 변환 : ", mapper.writeValueAsString(artist));
     }
 
 }
