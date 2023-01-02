@@ -22,7 +22,6 @@ class MusicControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("Album 에 담긴 노래목록 조회")
     public void albumListTest() throws Exception {
         this.mockMvc.perform(get("/albumList/BTS"))
                 .andDo(print());
