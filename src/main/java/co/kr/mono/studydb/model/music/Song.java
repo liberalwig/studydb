@@ -7,7 +7,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Song {
+public class
+Song {
     private String albumId;
     private String songName;
     private Float playTime;

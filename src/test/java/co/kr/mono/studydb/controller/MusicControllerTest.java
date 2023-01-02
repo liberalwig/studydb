@@ -31,5 +31,16 @@ class MusicControllerTest {
                 .andDo(print());
     }
 
+    @Test
+    public void albumTest() throws Exception {
+        this.mockMvc.perform(get("/album/BTS"))
+                .andDo(print());
+    }
+
+    @Test
+    public void songTest() throws Exception {
+        this.mockMvc.perform(get("/song/BTS"))
+                .andDo(print());
+    }
 
 }

@@ -31,10 +31,17 @@ class MusicJoinDaoTest {
         System.out.println(artist);
     }
 
-//    @DisplayName("Album Id -> Song 매핑 [Collection Mapping]")
+    @DisplayName("Album Id -> Song 매핑 [Collection Mapping]")
+    @Test
+    void selectAlbumByPrimaryKey1Test(){
+        Album album = musicJoinDao.selectAlbumByPrimaryKey1("BS1");
+        System.out.println(album);
+    }
+
+//    @DisplayName("Album Id -> Artist, Album Id -> Song 매핑 [Association / Collection Mapping]")
 //    @Test
-//    void selectAlbumByPrimaryKeyTest(){
-//        Album album = musicJoinDao.selectAlbumByPrimaryKey("BS1");
+//    void selectSongByPrimaryKeyTest(){
+////        Album album = musicJoinDao.selectAlbumByPrimaryKey("BS1");
 //        System.out.println(album);
 //    }
 }

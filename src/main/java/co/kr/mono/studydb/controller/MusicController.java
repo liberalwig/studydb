@@ -31,4 +31,11 @@ public class MusicController {
         log.info(artist);
         return artist;
     }
+
+    @GetMapping("/album/{albumId}")
+    public Album album(@PathVariable String albumId){
+        Album album = musicJoinService.searchAlbum(albumId);
+        log.info(album);
+        return album;
+    }
 }
