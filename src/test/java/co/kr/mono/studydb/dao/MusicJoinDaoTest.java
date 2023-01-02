@@ -34,7 +34,7 @@ class MusicJoinDaoTest {
 //    @DisplayName("Album Id -> Song 매핑 [Collection Mapping]")
 //    @Test
 //    void selectAlbumByPrimaryKeyTest(){
-//        Album album = musicJoinDao.selectAlbumByPrimaryKey1("BS1");
+//        Album album = musicJoinDao.selectAlbumByPrimaryKey("BS1");
 //        System.out.println(album);
 //    }
 }

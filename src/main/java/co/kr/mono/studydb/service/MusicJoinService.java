@@ -21,13 +21,7 @@ public class MusicJoinService {
         return musicJoinDao.selectArtistByPrimaryKey2(mst_id);
     }
 
-/*
-    public List<Album> albumList(String mst_id){
-       return musicJoinDao.selectArtistByPrimaryKey1(mst_id);
+   public Album album(String mst_id){
+        return musicJoinDao.selectAlbumByPrimaryKey(mst_id);
     }
-*/
-
-   /* public Album album(String mst_id){
-        return musicJoinDao.selectArtistByPrimaryKey3(mst_id);
-    }*/
 }
