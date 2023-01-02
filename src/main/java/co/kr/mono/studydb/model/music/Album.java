@@ -9,6 +9,7 @@ import java.util.List;
 public class Album {
 
     private String albumId;
+    private String mstId;
     private int albumSeq;
     private String albumTitle;
     private String openDate;
@@ -19,5 +20,5 @@ public class Album {
 
     //@JsonIgnore
     //@ToString.Exclude
-    private List<Song> songs; //album_id
+    private List<Song> songs;
 }

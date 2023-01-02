@@ -2,6 +2,7 @@ package co.kr.mono.studydb.controller;
 
 import co.kr.mono.studydb.model.music.Album;
 import co.kr.mono.studydb.model.music.Artist;
+import co.kr.mono.studydb.model.music.Song;
 import co.kr.mono.studydb.service.MusicJoinService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,9 @@ public class MusicController {
     }
 
     @GetMapping("/album/{albumId}")
-    public Album album(@PathVariable String albumId){
-        Album album = musicJoinService.searchAlbum(albumId);
-        log.info(album);
-        return album;
+    public List<Song> songs(@PathVariable String albumId){
+        List<Song> songs = musicJoinService.searchAlbum(albumId);
+        log.info(songs);
+        return songs;
     }
 }

@@ -37,7 +37,7 @@ class MusicJoinServiceTest {
     }
 
     @Test
-    @DisplayName("Album 정보 조회")
+    @DisplayName("Artist 정보 조회")
     public void searchArtist() throws JsonProcessingException {
         Artist artist = musicJoinService.searchArtist("BTS");
         log.info("Json 변환 : ", mapper.writeValueAsString(artist));

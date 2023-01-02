@@ -11,6 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MusicJoinDao {
     public List<Album> selectArtistByPrimaryKey1(String mst_id);
     public Artist selectArtistByPrimaryKey2(String mst_id);
-    public Album selectAlbumByPrimaryKey1(String album_id);
-    public Song selectSongByPrimaryKey(String album_id);
+    public List<Song> selectAlbumByPrimaryKey1(String album_id);
+//    public Song selectAlbumByPrimaryKey2(String album_id);
 }

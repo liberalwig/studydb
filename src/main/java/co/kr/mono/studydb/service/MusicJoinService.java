@@ -3,6 +3,7 @@ package co.kr.mono.studydb.service;
 import co.kr.mono.studydb.dao.MusicJoinDao;
 import co.kr.mono.studydb.model.music.Album;
 import co.kr.mono.studydb.model.music.Artist;
+import co.kr.mono.studydb.model.music.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class MusicJoinService {
         return musicJoinDao.selectArtistByPrimaryKey2(mst_id);
     }
 
-   public Album searchAlbum(String album_id){
+   public List<Song> searchAlbum(String album_id){
         return musicJoinDao.selectAlbumByPrimaryKey1(album_id);
     }
 

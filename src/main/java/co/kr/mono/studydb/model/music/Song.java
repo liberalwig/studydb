@@ -12,7 +12,5 @@ Song {
     private String albumId;
     private String songName;
     private Float playTime;
-    /*private Album album; */
-
-    //private Artist artist;
+    private Album album; // Association 추가하려면 필드 넣어야 함
 }
