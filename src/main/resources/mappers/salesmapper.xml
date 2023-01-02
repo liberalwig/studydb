@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.kr.mono.studydb.dao.AreaSalesDao">
+    <select id="findAreaSales" parameterType="string" resultType="AreaSalesDTO">
+
+        SELECT   AREA_CD AREACD
+        ,REGION_AREA REGIONAREA
+        ,PROD_ID PRODID
+        ,SUM(SALE_CNT) SALECNT
+        FROM SALE_TBL
+        WHERE AREA_CD =#{AREA_CD}
+        AND ROWNUM=1
+        GROUP BY AREA_CD, REGION_AREA, PROD_ID
+
+    </select>
+
+    <!--alias 덕분에 String을 string으로 써도 됨 Map을 map으로 -->
+    <select id="testid" parameterType="string" resultType="AreaSalesDTO"> <!--application.properties에 기본 경로가 있어서 짧게 쓸 수 있다 -->
+        <!--id : 각 SQL문을 구분 -->
+        <!--resultType : SELECT문 실행 결과를 담을 객체 패키지 이름을 포함한 클래스 이름 또는 객체 alias 지정 -->
+        <!--parameterType : 이 속성에 지정한 객체의 프로퍼티값이 SQL문의 입력 파라미터에 지정된다. -->
+        SELECT NAME
+        , "CLASS" cls
+        , CEIL((KOR+ENG+MAT)/3) SCORE
+        FROM EXAM_RSLT
+        WHERE NAME = #{NAME}
+
+    </select>
+
+    <select id="findAresaSalesMap" parameterType="string" resultType="map"><!--dto 만들기 귀찮아서 map으로 함-->
+
+        SELECT   AREA_CD AREACD
+        ,REGION_AREA REGIONAREA
+        ,PROD_ID PRODID
+        ,SUM(SALE_CNT) SALECNT
+        FROM SALE_TBL
+        WHERE AREA_CD =#{AREA_CD}
+        AND ROWNUM=1
+        GROUP BY AREA_CD, REGION_AREA, PROD_ID
+
+    </select>
+
+    <select id="findMsaleByMultiParm" parameterType="hashmap" resultType="hashmap">
+
+        SELECT PRODID, PRODNM, SALECNT
+        FROM MSALES
+        WHERE PRODID LIKE #{PRODID}||'%'
+        AND PRODNM LIKE #{PRODNM}||'%'
+        AND ROWNUM = 1
+
+    </select>
+
+    <select id="findMsaleByMultiReturn" parameterType="hashmap" resultType="hashmap"> <!--결과값이 여러 줄일 때는 리스트로 뽑으니까 리스트 안에 어떤 데이터 타입을 넣을것이냐는 뜻-->
+
+        SELECT PRODID, PRODNM, SALECNT
+        FROM MSALES
+        WHERE PRODID LIKE #{PRODID}||'%'
+        AND PRODNM LIKE #{PRODNM, jdbcType=VARCHAR}||'%' <!--jdbc는 널값이 들어올 수 있을 때 적어줌(널도 타입이 있음) -->
+    </select>
+
+</mapper>
