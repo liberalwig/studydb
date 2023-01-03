@@ -22,26 +22,29 @@ class MusicControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void albumListTest() throws Exception {
-        this.mockMvc.perform(get("/albumList/BTS"))
+    @DisplayName("C: Albumlist -> Artist 매핑 [Association Mapping]")
+    public void albumlistArtistTest() throws Exception {
+        this.mockMvc.perform(get("/albumList/BS1"))
                 .andDo(print());
     }
 
     @Test
-    public void artistTest() throws Exception {
+    @DisplayName("C: Artist -> Album 매핑 [Collection Mapping]")
+    public void artistAlbumTest() throws Exception {
         this.mockMvc.perform(get("/artist/BTS"))
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("C: Song -> Album 매핑 [Association Mapping]")
+    public void songAlbumTest() throws Exception {
+        this.mockMvc.perform(get("/song/BTS"))
                 .andDo(print());
     }
 
     @Test
     public void albumTest() throws Exception {
         this.mockMvc.perform(get("/album/BTS"))
-                .andDo(print());
-    }
-
-    @Test
-    public void songTest() throws Exception {
-        this.mockMvc.perform(get("/song/BTS"))
                 .andDo(print());
     }
 

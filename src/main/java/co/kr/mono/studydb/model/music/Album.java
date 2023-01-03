@@ -1,15 +1,17 @@
 package co.kr.mono.studydb.model.music;
 
 import co.kr.mono.studydb.model.music.Artist;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
 @Data
 public class Album {
 
-    private String albumId;
-    private String mstId;
+    private String albumId; // PK
+    private String mstId; // FK
     private int albumSeq;
     private String albumTitle;
     private String openDate;
@@ -18,7 +20,7 @@ public class Album {
     //@ToString.Exclude
     private Artist artist;
 
-    //@JsonIgnore
-    //@ToString.Exclude
+    @JsonIgnore
+    @ToString.Exclude
     private List<Song> songs;
 }

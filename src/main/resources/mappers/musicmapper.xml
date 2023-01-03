@@ -5,7 +5,7 @@
 
 <mapper namespace="co.kr.mono.studydb.dao.MusicJoinDao">
 
-    <resultMap id="selectArtistAlbumMap" type="Album">
+    <resultMap id="selectArtistAlbumlistMap" type="Album">
         <id column="album_Id" property="albumId" jdbcType="VARCHAR" />
         <result column="album_seq" property="albumSeq" jdbcType="INTEGER" />
         <result column="album_title" property="albumTitle" jdbcType="VARCHAR" />
@@ -17,7 +17,7 @@
         </association>
     </resultMap>
 
-    <select id="selectArtistByPrimaryKey1" resultMap="selectArtistAlbumMap" parameterType="string">
+    <select id="selectArtistByAlbumlist" resultMap="selectArtistAlbumlistMap" parameterType="string">
         SELECT A.MST_ID MST_ID
             , A.MST_NAME MST_NAME
             , A.DEBUT_DATE DEBUT_DATE
@@ -27,7 +27,7 @@
             , B.OPEN_DATE OPEN_DATE
         FROM ARTIST A , ALBUM B
         WHERE A.MST_ID = B.MST_ID
-        AND B.MST_ID = #{mst_id , jdbcType=VARCHAR}
+        AND B.ALBUM_ID = #{album_id , jdbcType=VARCHAR}
     </select>
 
     <resultMap id="selectArtistPkAlbumMap" type="Artist" >

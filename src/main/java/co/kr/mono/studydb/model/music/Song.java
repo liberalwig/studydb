@@ -7,10 +7,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class
-Song {
-    private String albumId;
-    private String songName;
+public class Song {
+    private String albumId; // FK, PK
+    private String songName; // PK
     private Float playTime;
     private Album album; // Association 추가하려면 필드 넣어야 함
 }

@@ -2,6 +2,7 @@ package co.kr.mono.studydb.service;
 
 import co.kr.mono.studydb.model.music.Album;
 import co.kr.mono.studydb.model.music.Artist;
+import co.kr.mono.studydb.model.music.Song;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -11,11 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.swing.plaf.PanelUI;
-
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Slf4j
@@ -30,17 +27,23 @@ class MusicJoinServiceTest {
     void setup() {mapper = new ObjectMapper();}
 
     @Test
-    @DisplayName("Album 에 담긴 노래목록 조회")
-    public void albumList() throws JsonProcessingException {
-        List<Album> albumList = musicJoinService.searchArtistList("BTS");
+    @DisplayName("S: Albumlist -> Artist 매핑 [Association Mapping]")
+    public void searchArtistByAlbumlist() throws JsonProcessingException {
+        List<Album> albumList = musicJoinService.searchArtistByAlbumlist("BTS");
         log.info("Json 변환 : ", mapper.writeValueAsString(albumList));
     }
 
     @Test
-    @DisplayName("Artist 정보 조회")
-    public void searchArtist() throws JsonProcessingException {
-        Artist artist = musicJoinService.searchArtist("BTS");
+    @DisplayName("S: Artist -> Album 매핑 [Collection Mapping]")
+    public void searchAlbumByArtist() throws JsonProcessingException {
+        Artist artist = musicJoinService.searchAlbumByArtist("BTS");
         log.info("Json 변환 : ", mapper.writeValueAsString(artist));
     }
 
+    @Test
+    @DisplayName("S: Song -> Album 매핑 [Association Mapping]")
+    public void searchAlbumBySong() throws JsonProcessingException {
+        List<Song> songs = musicJoinService.searchAlbumBySong("BTS");
+        log.info("Json 변환 : ", mapper.writeValueAsString(songs));
+    }
 }

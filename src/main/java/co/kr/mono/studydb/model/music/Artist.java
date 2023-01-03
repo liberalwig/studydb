@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class Artist {
-    private String mstId;
+    private String mstId; // PK, FK
     private String mstName;
     private String debutDate;
 

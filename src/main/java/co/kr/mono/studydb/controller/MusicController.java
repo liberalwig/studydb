@@ -19,23 +19,23 @@ public class MusicController {
     @Autowired
     MusicJoinService musicJoinService;
 
-    @GetMapping("/albumList/{artistId}")
-    public List<Album> albumList(@PathVariable String artistId){
-        List<Album> albums = musicJoinService.searchArtistList(artistId);
+    @GetMapping("/albumList/{albumId}")
+    public List<Album> albumList(@PathVariable String albumId){
+        List<Album> albums = musicJoinService.searchArtistByAlbumlist(albumId);
         log.info(albums);
         return albums;
     }
 
     @GetMapping("/artist/{artistId}")
     public Artist artist(@PathVariable String artistId){
-        Artist artist = musicJoinService.searchArtist(artistId);
+        Artist artist = musicJoinService.searchAlbumByArtist(artistId);
         log.info(artist);
         return artist;
     }
 
     @GetMapping("/album/{albumId}")
     public List<Song> songs(@PathVariable String albumId){
-        List<Song> songs = musicJoinService.searchAlbum(albumId);
+        List<Song> songs = musicJoinService.searchAlbumBySong(albumId);
         log.info(songs);
         return songs;
     }
