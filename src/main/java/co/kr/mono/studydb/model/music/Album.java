@@ -16,11 +16,11 @@ public class Album {
     private String albumTitle;
     private String openDate;
 
-    //@JsonIgnore
-    //@ToString.Exclude
+//    @JsonIgnore
+//    @ToString.Exclude
     private Artist artist;
 
-    @JsonIgnore
-    @ToString.Exclude
+//    @JsonIgnore
+//    @ToString.Exclude
     private List<Song> songs;
 }
