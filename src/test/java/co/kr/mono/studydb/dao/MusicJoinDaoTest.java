@@ -19,30 +19,30 @@ class MusicJoinDaoTest {
 
     @DisplayName("D: Album -> Artist 매핑 [Association Mapping] ")
     @Test
-    void selectArtistByPrimaryKeyTest(){
-        List<Album> album = musicJoinDao.selectArtistByAlbumlist("BTS");
+    void selectArtistByAlbumTest(){
+        List<Album> album = musicJoinDao.selectArtistByAlbum("BS1");
        // album.forEach(System.out::println);
-        System.out.println(musicJoinDao);
+        System.out.println(album);
     }
 
     @DisplayName("D: Artist -> Album 매핑 [Collection Mapping]")
     @Test
-    void selectArtistByPrimaryKeyTest2(){
-        Artist artist = musicJoinDao.selectArtistAlbumByPrimaryKey2("BTS");
+    void selectAlbumByArtistTest(){
+        Artist artist = musicJoinDao.selectAlbumByArtist("BTS");
         System.out.println(artist);
     }
 
     @DisplayName("D: Song -> Album 매핑 [Association Mapping]")
     @Test
-    void selectAlbumByPrimaryKey1Test(){
-        List<Song> songs = musicJoinDao.selectAlbumSongByPrimaryKey1("BS1");
+    void selectAlbumBySongTest(){
+        List<Song> songs = musicJoinDao.selectAlbumBySong("Danger");
         System.out.println(songs);
     }
 
-//    @DisplayName("Album Id -> Artist, Album Id -> Song 매핑 [Association / Collection Mapping]")
-//    @Test
-//    void selectSongByPrimaryKeyTest(){
-//         Song songs = musicJoinDao.selectAlbumByPrimaryKey1("BS1");
-//        System.out.println(songs);
-//    }
+    @Test
+    @DisplayName("C: Artist -> (Album 지나) Song 매핑 [Collection / Collection Mapping]")
+    void selectSongByArtistTest(){
+        Artist artist = musicJoinDao.selectSongByArtist("IU");
+        System.out.println(artist);
+    }
 }

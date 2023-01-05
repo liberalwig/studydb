@@ -14,16 +14,20 @@ public class MusicJoinService {
     @Autowired
     MusicJoinDao musicJoinDao;
 
-    public List<Album> searchArtistByAlbumlist(String mst_id){
-        return musicJoinDao.selectArtistByAlbumlist(mst_id);
+    public List<Album> searchArtistByAlbum(String mst_id){
+        return musicJoinDao.selectArtistByAlbum(mst_id);
     }
 
-    public Artist searchAlbumByArtist(String mst_id) {
-        return musicJoinDao.selectArtistAlbumByPrimaryKey2(mst_id);
+    public Artist searchAlbumByArtist(String artist_id) {
+        return musicJoinDao.selectAlbumByArtist(artist_id);
     }
 
-   public List<Song> searchAlbumBySong(String album_id){
-        return musicJoinDao.selectAlbumSongByPrimaryKey1(album_id);
+   public List<Song> searchAlbumBySong(String songName){
+        return musicJoinDao.selectAlbumBySong(songName);
+    }
+
+    public Artist searchSongByArtist(String artist_id) {
+        return musicJoinDao.selectSongByArtist(artist_id);
     }
 
 }

@@ -2,6 +2,7 @@ package co.kr.mono.studydb.model.music;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -12,11 +13,10 @@ public class Artist {
     private String debutDate;
 
     @JsonIgnore
-    //@ToString.Exclude
+    @ToString.Exclude
     private List<Album> album;
 
-    @JsonIgnore // Json 만들 때 그 컬럼을 빼겠다
-    //@ToString.Exclude
+//    @JsonIgnore // Json 만들 때 그 컬럼을 빼겠다
+//    @ToString.Exclude
     private  List<Song> songs; //album_id
-
 }

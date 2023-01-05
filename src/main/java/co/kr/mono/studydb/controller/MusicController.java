@@ -19,9 +19,9 @@ public class MusicController {
     @Autowired
     MusicJoinService musicJoinService;
 
-    @GetMapping("/albumList/{albumId}")
-    public List<Album> albumList(@PathVariable String albumId){
-        List<Album> albums = musicJoinService.searchArtistByAlbumlist(albumId);
+    @GetMapping("/album/{albumId}")
+    public List<Album> album(@PathVariable String albumId){
+        List<Album> albums = musicJoinService.searchArtistByAlbum(albumId);
         log.info(albums);
         return albums;
     }
@@ -33,10 +33,18 @@ public class MusicController {
         return artist;
     }
 
-    @GetMapping("/album/{albumId}")
-    public List<Song> songs(@PathVariable String albumId){
-        List<Song> songs = musicJoinService.searchAlbumBySong(albumId);
-        log.info(songs);
-        return songs;
+    @GetMapping("/song/{songName}")
+    public List<Song> song(@PathVariable String songName){
+        List<Song> song = musicJoinService.searchAlbumBySong(songName);
+        log.info(song);
+        return song;
     }
+
+    @GetMapping("/artistSong/{artistId}")
+    public Artist artistSong(@PathVariable String artistId){
+        Artist artistSong = musicJoinService.searchSongByArtist(artistId);
+        log.info(artistSong);
+        return artistSong;
+    }
+
 }

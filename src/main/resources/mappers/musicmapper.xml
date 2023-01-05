@@ -5,7 +5,7 @@
 
 <mapper namespace="co.kr.mono.studydb.dao.MusicJoinDao">
 
-    <resultMap id="selectArtistAlbumlistMap" type="Album">
+    <resultMap id="selectArtistAlbumMap" type="Album">
         <id column="album_Id" property="albumId" jdbcType="VARCHAR" />
         <result column="album_seq" property="albumSeq" jdbcType="INTEGER" />
         <result column="album_title" property="albumTitle" jdbcType="VARCHAR" />
@@ -17,8 +17,9 @@
         </association>
     </resultMap>
 
-    <select id="selectArtistByAlbumlist" resultMap="selectArtistAlbumlistMap" parameterType="string">
-        SELECT A.MST_ID MST_ID
+    <select id="selectArtistByAlbum" resultMap="selectArtistAlbumMap" parameterType="string">
+        SELECT
+            A.MST_ID MST_ID
             , A.MST_NAME MST_NAME
             , A.DEBUT_DATE DEBUT_DATE
             , B.ALBUM_ID ALBUM_ID
@@ -30,7 +31,7 @@
         AND B.ALBUM_ID = #{album_id , jdbcType=VARCHAR}
     </select>
 
-    <resultMap id="selectArtistPkAlbumMap" type="Artist" >
+    <resultMap id="selectAlbumByArtistMap" type="Artist" >
         <id column="mst_id" property="mstId" jdbcType="VARCHAR" />
         <result column="mst_name" property="mstName" jdbcType="VARCHAR" />
         <result column="debut_date" property="debutDate" jdbcType="VARCHAR" />
@@ -42,20 +43,21 @@
         </collection>
     </resultMap>
 
-    <select id="selectArtistByPrimaryKey2" resultMap="selectArtistPkAlbumMap" parameterType="string">
-        SELECT A.MST_ID MST_ID
-            , A.MST_NAME MST_NAME
-            , A.DEBUT_DATE DEBUT_DATE
-            , B.ALBUM_ID ALBUM_ID
-            , B.ALBUM_SEQ ALBUM_SEQ
-            , B.ALBUM_TITLE ALBUM_TITLE
-            , B.OPEN_DATE OPEN_DATE
-        FROM ARTIST A , ALBUM B
+    <select id="selectAlbumByArtist" resultMap="selectAlbumByArtistMap" parameterType="string">
+        SELECT
+        A.ALBUM_ID ALBUM_ID
+        , A.ALBUM_SEQ ALBUM_SEQ
+        , A.ALBUM_TITLE ALBUM_TITLE
+        , A.OPEN_DATE OPEN_DATE
+        , B.MST_ID MST_ID
+        , B.MST_NAME MST_NAME
+        , B.DEBUT_DATE DEBUT_DATE
+        FROM ALBUM A, ARTIST B
         WHERE A.MST_ID = B.MST_ID
-        AND B.MST_ID = #{mst_id , jdbcType=VARCHAR}
+        AND B.MST_ID = #{artist_id , jdbcType=VARCHAR}
     </select>
 
-    <resultMap id="selectSongPkAlbumMap" type="Song" >
+    <resultMap id="searchAlbumBySongMap" type="Song" >
         <id column="song_name" property="songName" jdbcType="VARCHAR" />
         <id column="album_id" property="albumId" jdbcType="VARCHAR" />
         <result column="play_time" property="playTime" jdbcType="INTEGER" />
@@ -68,47 +70,46 @@
         </association>
     </resultMap>
 
-    <select id="selectAlbumByPrimaryKey1" resultMap="selectSongPkAlbumMap" parameterType="string">
+    <select id="selectAlbumBySong" resultMap="searchAlbumBySongMap" parameterType="string">
         SELECT
             A.ALBUM_ID ALBUM_ID
             , A.MST_ID MST_ID
-            , A.ALBUM_TITLE ALBUM_TITLE
             , A.ALBUM_SEQ ALBUM_SEQ
+            , A.ALBUM_TITLE ALBUM_TITLE
             , A.OPEN_DATE OPEN_DATE
             , B.SONG_NAME SONG_NAME
+            , B.ALBUM_ID ALBUM_ID
             , B.PLAY_TIME PLAY_TIME
         FROM ALBUM A , SONG B
         WHERE A.ALBUM_ID = B.ALBUM_ID
-        AND A.ALBUM_ID = #{album_id , jdbcType=VARCHAR}
+        AND B.SONG_NAME = #{song_name , jdbcType=VARCHAR}
     </select>
 
 
+    <resultMap id="selectSongByArtistMap" type="Artist" >
+        <id column="mst_id" property="mstId" jdbcType="VARCHAR" />
+        <result column="mst_name" property="mstName" jdbcType="VARCHAR" />
+        <result column="debut_date" property="debutDate" jdbcType="VARCHAR" />
+        <collection property="songs" javaType="java.util.ArrayList" ofType="Song">
+            <id column="song_name" property="songName" jdbcType="VARCHAR" />
+            <id column="album_id" property="albumId" jdbcType="VARCHAR" />
+            <result column="play_time" property="playTime" jdbcType="INTEGER" />
+        </collection>
+    </resultMap>
 
-<!--    <resultMap id="selectSongPkAlbumMap" type="Album" >-->
-<!--        <id column="album_Id" property="albumId" jdbcType="VARCHAR" />-->
-<!--        <result column="album_seq" property="albumSeq" jdbcType="INTEGER" />-->
-<!--        <result column="album_title" property="albumTitle" jdbcType="VARCHAR" />-->
-<!--        <result column="open_date" property="openDate" jdbcType="VARCHAR" />-->
-<!--        <result column="open_date" property="openDate" jdbcType="VARCHAR" />-->
-<!--        <collection property="album" javaType="java.util.ArrayList" ofType="Song">-->
-<!--            <id column="album_Id" property="albumId" jdbcType="VARCHAR" />-->
-<!--            <result column="song_name" property="songName" jdbcType="VARCHAR" />-->
-<!--            <result column="play_time" property="playTime" jdbcType="INTEGER" />-->
-<!--        </collection>-->
-<!--    </resultMap>-->
+    <select id="selectSongByArtist" resultMap="selectSongByArtistMap" parameterType="string">
+        SELECT
+        A.SONG_NAME SONG_NAME
+        , A.ALBUM_ID ALBUM_ID
+        , A.PLAY_TIME PLAY_TIME
 
-<!--    <select id="selectAlbumByPrimaryKey2" resultMap="artistAlbumSong" parameterType="string">-->
-<!--        SELECT A.MST_ID MST_ID-->
-<!--        , A.MST_NAME MST_NAME-->
-<!--        , A.DEBUT_DATE DEBUT_DATE-->
-<!--        , B.ALBUM_ID ALBUM_ID-->
-<!--        , B.ALBUM_SEQ ALBUM_SEQ-->
-<!--        , B.ALBUM_TITLE ALBUM_TITLE-->
-<!--        , B.OPEN_DATE OPEN_DATE-->
-<!--        , C.SONG_NAME SONG_NAME-->
-<!--        FROM ARTIST A,ALBUM B,SONG C-->
-<!--        WHERE A.MST_ID = B.MST_ID-->
-<!--        AND B.ALBUM_ID = C.ALBUM_ID-->
-<!--        AND B.ALBUM_ID = #{album_id, jdbcType=VARCHAR}-->
-<!--    </select>-->
+        , C.MST_ID MST_ID
+        , C.MST_NAME MST_NAME
+        , C.DEBUT_DATE DEBUT_DATE
+
+        FROM SONG A, ALBUM B, ARTIST C
+        WHERE C.MST_ID = B.MST_ID
+        AND B.ALBUM_ID = A.ALBUM_ID
+        AND C.MST_ID = #{artist_id, jdbcType=VARCHAR}
+    </select>
 </mapper>

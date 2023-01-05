@@ -28,9 +28,9 @@ class MusicJoinServiceTest {
 
     @Test
     @DisplayName("S: Albumlist -> Artist 매핑 [Association Mapping]")
-    public void searchArtistByAlbumlist() throws JsonProcessingException {
-        List<Album> albumList = musicJoinService.searchArtistByAlbumlist("BTS");
-        log.info("Json 변환 : ", mapper.writeValueAsString(albumList));
+    public void searchArtistByAlbum() throws JsonProcessingException {
+        List<Album> album = musicJoinService.searchArtistByAlbum("BS1");
+        log.info("Json 변환 : ", mapper.writeValueAsString(album));
     }
 
     @Test
@@ -43,7 +43,14 @@ class MusicJoinServiceTest {
     @Test
     @DisplayName("S: Song -> Album 매핑 [Association Mapping]")
     public void searchAlbumBySong() throws JsonProcessingException {
-        List<Song> songs = musicJoinService.searchAlbumBySong("BTS");
-        log.info("Json 변환 : ", mapper.writeValueAsString(songs));
+        List<Song> song = musicJoinService.searchAlbumBySong("Lost");
+        log.info("Json 변환 : ", mapper.writeValueAsString(song));
+    }
+
+    @Test
+    @DisplayName("S: Artist -> (Album 지나) Song 매핑 [Collection / Collection Mapping]")
+    public void searchSongByArtist() throws JsonProcessingException {
+        Artist artist = musicJoinService.searchSongByArtist("IU");
+        log.info("Json 변환 : ", mapper.writeValueAsString(artist));
     }
 }
