@@ -22,7 +22,7 @@ public class SalesController {
 
     //http://localhost:8000/salelist/10
     @GetMapping("/salelist/{areacd}")
-    public AreaSalesDTO saleList(@PathVariable String areacd){ //@PathVariable uri 변수
+    public AreaSalesDTO saleList(@PathVariable String areacd) { //@PathVariable uri 변수
         AreaSalesDTO dto = salesService.selectSales(areacd);
         log.info(areacd);
         return dto;
@@ -30,7 +30,7 @@ public class SalesController {
 
     //http://localhost:8000/salemap/10
     @GetMapping("/salemap/{areacd}")
-    public Map<String, Object> SalesMap(@PathVariable String areacd){
+    public Map<String, Object> SalesMap(@PathVariable String areacd) {
         Map<String, Object> map = salesService.selectSalesMap(areacd);
         log.info(areacd);
         return map;
@@ -38,7 +38,7 @@ public class SalesController {
 
     @GetMapping("salemaplist")
     // http://localhost:8000/salemaplist?PRODID=10&PRODNM=notebook
-    public Map<String, Object> SalesMapParam(@RequestParam HashMap<String, Object> param){
+    public Map<String, Object> SalesMapParam(@RequestParam HashMap<String, Object> param) {
         /*HashMap<String, Object> paramVal = new HashMap<>();
 
         paramVal.put("PRODID", param.get("PRODID"));
@@ -51,7 +51,7 @@ public class SalesController {
 
     @GetMapping("/mulitlist")
     //http://localhost:8000/mulitlist?PRODID=10&PRODNM=not
-    public List<HashMap<String, Object>> SalesMapParamMulit(@RequestParam Map<String, String> param){
+    public List<HashMap<String, Object>> SalesMapParamMulit(@RequestParam Map<String, String> param) {
 
         Map<String, Object> paramVal = new HashMap<>();
 
@@ -78,6 +78,4 @@ public class SalesController {
 
         return listmap;
     }*/
-
-
 }
